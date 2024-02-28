@@ -14,26 +14,27 @@ while True:
     print('Ready to serve ...')
     connectionSocket, addr = serverSocket.accept()
     try:
-        message = # Fill in Start # Fill in End
+        message = connectionSocket.recv() # Fill in Start # Fill in End
         filename = message.split()[1]
         f = open(filename[1:])
-        outputdata = # Fill in start # Fill in End
+        outputdata = f.read()# Fill in start # Fill in End
         # Send one HTTP header line into socket
         # Fill in Start
+        connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n")
         # Fill in End
         # Send the Content of the requested file to the client
         for i in range(0, len(outputdata)):
             connectionSocket.send(outputdata[i].encode())
         connectionSocket.send("\r\n".encode())
-        
-
         connectionSocket.close()
     except IOError:
         # Send response message for file not found
         # Fill in Start
+        connectionSocket.send("HTTP/1.1 404 NOT FOUND\n\r\n\r")
         # Fill in End 
         # Close client socket
         # Fill in Start
+        connectionSocket.close()
         # Fill in End
 
 serverSocket.close()
