@@ -4,7 +4,7 @@ import sys
 serverSocket = socket(AF_INET, SOCK_STREAM)
 
 # Prepare a Server Socket
-host = socket.gethostname()
+host = gethostname()
 port = 80
 serverSocket.bind((host,port))
 serverSocket.listen()
@@ -20,7 +20,7 @@ while True:
         outputdata = f.read()# Fill in start # Fill in End
         # Send one HTTP header line into socket
         # Fill in Start
-        connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n")
+        connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n".encode())
         # Fill in End
         # Send the Content of the requested file to the client
         for i in range(0, len(outputdata)):
